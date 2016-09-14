@@ -12,7 +12,8 @@ class Mail:
         self.server = smtplib.SMTP(self.config.config['mail']['server'], self.config.config['mail']['port'])
 
     def start(self):
-        self.server.starttls()
+        if self.config.config['mail']['starttls_required']:
+            self.server.starttls()
         self.server.login(self.config.config['mail']['username'], self.config.config['mail']['password'])
 
     def stop(self):
